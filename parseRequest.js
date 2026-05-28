@@ -3,9 +3,12 @@ function parseRequest(parseText) {
     //asking what the browser wants by viewing it's path, method and version
     //this happens before the response
 
-    const first_line = parseText.split('r/n/')
+    const lines = parseText.split("\r\n")
+
+    const first_line = lines[0]
 
     const parts = first_line.split(" ")
+    
 
     const request = {}
 
