@@ -1,3 +1,8 @@
+const parseRequest = require('./parseRequest')
+const createResponse = require('./createResponse')
+const routes = require('./routes')
+
+
 //access nodes TCP module
 const net = require('net')
 
@@ -8,6 +13,21 @@ const server =  net.createServer(function (socket) {
     socket.on("data", (data) => {
 
         console.log(data.toString())
+
+        const requestText = parseRequest(httpText) //request from browser(what it wants)
+
+        const routeData = routes(requestText)
+
+        const respondData = createResponse(
+            respondData.status,
+            respondData.content_Type,
+            respondData.body
+        )
+
+        socket.write(respondData)
+
+        socket.end()
+    
     })
 })
 
