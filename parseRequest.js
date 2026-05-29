@@ -12,12 +12,12 @@ function parseRequest(parseText) {
 
     const request = {}
 
-    request.path = parts[0]
-    request.method = parts[1]
+    request.method = parts[0] 
+    request.path = parts[1] //this is the one routes finds to return response
     request.version = parts[2]
 
     return request
 
 }
 
-module.exports = {parseRequest}
+module.exports = parseRequest

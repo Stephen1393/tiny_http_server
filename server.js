@@ -14,19 +14,21 @@ const server =  net.createServer(function (socket) {
 
         console.log(data.toString())
 
+        const httpText = data.toString() //store changed data
+
         const requestText = parseRequest(httpText) //request from browser(what it wants)
 
-        const routeData = routes(requestText)
+        const routeData = routes(requestText) //call the correct requested structure
 
-        const respondData = createResponse(
-            respondData.status,
-            respondData.content_Type,
-            respondData.body
+        const respondData = createResponse( //returns correct HTTP format for request
+            routeData.status,
+            routeData.contentType,
+            routeData.body
         )
 
-        socket.write(respondData)
+        socket.write(respondData) //sends bytes through the tcp connection
 
-        socket.end()
+        socket.end() //closes tcp connection
     
     })
 })
